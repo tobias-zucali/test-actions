@@ -10,6 +10,9 @@ jobs:
     steps:
       - name: Get branch name
         uses: nelonoel/branch-name@v1.0.1
+      - name: Set SHORT_COMMIT_SHA
+        run: |
+          echo "github sha: ${${{ github.sha }}:0:8}"
       - name: Print stuff
         run: |
           echo "branch name: ${{ env.BRANCH_NAME }}"
