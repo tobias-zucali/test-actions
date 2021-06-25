@@ -15,8 +15,10 @@ jobs:
     steps:
       - name: Validate input
         if: github.event.inputs.mavenTestProfile && github.event.inputs.mavenTestProfile != 'integration' && github.event.inputs.mavenTestProfile != 'subintegration'
-        # if: '${{ github.event.inputs.mavenTestProfile && github.event.inputs.mavenTestProfile != "integration" && github.event.inputs.mavenTestProfile != "subintegration" }}'
-        run: ${{ ::set-failed::'Maven test profile must be one of "integration"|"subintegration"|""' }}
+        uses: actions/github-script@v3
+        with:
+          script: |
+              core.setFailed('Maven test profile must be one of "integration"|"subintegration"|""')
       - name: Get branch name
         uses: nelonoel/branch-name@v1.0.1
       - name: Set SHORT_COMMIT_SHA
