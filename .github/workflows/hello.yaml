@@ -1,0 +1,12 @@
+name: Just test
+
+# TODO: change to [workflow_dispatch]
+on: push
+
+jobs:
+  run_integration_steps:
+    runs-on: linux
+
+    steps:
+      - name: Get branch name
+        uses: nelonoel/branch-name@v1.0.1
