@@ -16,22 +16,17 @@ jobs:
   something_to_test:
     runs-on: ubuntu-latest
 
-    env:
-      MAVEN_FLAGS: ''
-      COMMIT_PREFIX: ''
-      PR_BODY_STORY_TEXT: ''
-
     steps:
       # compute inputs
       - name: Add profile to MAVEN_FLAGS
         if: github.event.inputs.mavenProfile
-        run: echo "MAVEN_FLAGS='${{ env.MAVEN_FLAGS }} -P ${{ github.event.inputs.mavenProfile }}'" >> $GITHUB_ENV
+        run: echo "MAVEN_FLAGS=${{ env.MAVEN_FLAGS }} -P ${{ github.event.inputs.mavenProfile }}" >> $GITHUB_ENV
       - name: Add test pattern to MAVEN_FLAGS
         if: github.event.inputs.mavenTestPattern
-        run: echo "MAVEN_FLAGS='${{ env.MAVEN_FLAGS }} -Dtest=${{ github.event.inputs.mavenTestPattern }} -DfailIfNoTests=false'" >> $GITHUB_ENV
+        run: echo "MAVEN_FLAGS=${{ env.MAVEN_FLAGS }} -Dtest=${{ github.event.inputs.mavenTestPattern }} -DfailIfNoTests=false" >> $GITHUB_ENV
       - name: Set COMMIT_PREFIX
         if: github.event.inputs.storyId
-        run: echo "COMMIT_PREFIX='[${{ github.event.inputs.storyId }}] '" >> $GITHUB_ENV
+        run: echo "COMMIT_PREFIX=[${{ github.event.inputs.storyId }}] " >> $GITHUB_ENV
       - name: Set PR body text
         if: github.event.inputs.storyId
         run: echo "PR_BODY_STORY_TEXT='Associated with [${{ github.event.inputs.storyId }}]'" >> $GITHUB_ENV
