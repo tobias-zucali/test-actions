@@ -24,4 +24,5 @@ jobs:
           sha=${{ github.sha }}
           echo "short github sha: ${sha:0:8}"
           echo "short github sha: ${SHORT_COMMIT_SHA}"
+          echo "github sha: ${GITHUB_SHA:0:8}"
 
