@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: echo action url
+        run: echo "https://github.com/${{github.repository}}/actions/runs/${{ github.run_id }}"
       - name: Validate input
         if: github.event.inputs.mavenTestProfile && github.event.inputs.mavenTestProfile != 'integration' && github.event.inputs.mavenTestProfile != 'subintegration'
         uses: actions/github-script@v3
