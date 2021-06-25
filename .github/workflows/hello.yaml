@@ -4,7 +4,7 @@ name: Just test
 on: push
 
 jobs:
-  something to test:
+  something_to_test:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,4 +25,6 @@ jobs:
           echo "short github sha: ${sha:0:8}"
           echo "short github sha: ${SHORT_COMMIT_SHA}"
           echo "github sha: ${GITHUB_SHA:0:8}"
+      - name: Fail
+        run: ${{ ::set-failed::"It is because" }}
 
