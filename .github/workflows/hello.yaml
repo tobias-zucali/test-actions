@@ -5,7 +5,9 @@ on:
   workflow_dispatch:
     inputs:
       mavenTestProfile:
-        description: 'Maven test profile ("integration"|"subintegration"|"")'
+        description: |
+          Maven test profile ("integration"|"subintegration"|"")
+          multiple lines
         default: 'integration'
 
 jobs:
