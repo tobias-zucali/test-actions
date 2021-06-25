@@ -5,8 +5,16 @@ on: push
 
 jobs:
   run_integration_steps:
-    runs-on: linux
+    runs-on: ubuntu-latest
 
     steps:
       - name: Get branch name
         uses: nelonoel/branch-name@v1.0.1
+      - name: Print stuff
+        run: |
+          echo "branch name: ${{ env.BRANCH_NAME }}"
+          echo "github sha: ${{ github.sha }}"
+          echo "github sha: ${{ env.GITHUB_SHA }}"
+          echo "github sha: ${{ github.sha:0:8 }}"
+          echo "github sha: ${{ env.GITHUB_SHA:0:8 }}"
+
