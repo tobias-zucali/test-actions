@@ -1,13 +1,21 @@
 name: Just test
 
-# TODO: change to [workflow_dispatch]
-on: push
+on: 
+  push:
+  workflow_dispatch:
+    inputs:
+      mavenTestProfile:
+        description: 'Maven test profile ("integration"|"subintegration"|"")'
+        default: 'integration'
 
 jobs:
   something_to_test:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Validate input
+        if: "${{ github.event.inputs.mavenTestProfile && github.event.inputs.mavenTestProfile != "integration" && github.event.inputs.mavenTestProfile != "subintegration" }}"
+        run: ${{ ::set-failed::'Maven test profile must be one of "integration"|"subintegration"|""' }}
       - name: Get branch name
         uses: nelonoel/branch-name@v1.0.1
       - name: Set SHORT_COMMIT_SHA
@@ -25,6 +33,4 @@ jobs:
           echo "short github sha: ${sha:0:8}"
           echo "short github sha: ${SHORT_COMMIT_SHA}"
           echo "github sha: ${GITHUB_SHA:0:8}"
-      - name: Fail
-        run: ${{ ::set-failed::"It is because" }}
 
