@@ -29,7 +29,8 @@ jobs:
         run: echo "COMMIT_PREFIX=[${{ github.event.inputs.storyId }}] " >> $GITHUB_ENV
       - name: Set PR body text
         if: github.event.inputs.storyId
-        run: echo "PR_BODY_STORY_TEXT='Associated with [${{ github.event.inputs.storyId }}]'" >> $GITHUB_ENV
+        run: echo "PR_BODY_STORY_TEXT=Associated with [${{ github.event.inputs.storyId }}]" >> $GITHUB_ENV
+
       - name: echo action url
         run: echo "https://github.com/${{github.repository}}/actions/runs/${{ github.run_id }}"
       - name: Validate input
