@@ -4,7 +4,7 @@ name: Just test
 on: push
 
 jobs:
-  run_integration_steps:
+  something to test:
     runs-on: ubuntu-latest
 
     steps:
