@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Log inputs
         run: |
-          echo "
+          echo "::set-output name=matrix::"
             Pre-build skipping tests: ${{ contains(github.event.inputs.prebuild, 'true') }}
             Maven flags: ${{ github.event.inputs.mavenFlags }}
             OpenPose container port: ${{ github.event.inputs.openposeContainerPort }}
