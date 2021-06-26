@@ -26,13 +26,16 @@ jobs:
       PR_BODY_STORY_TEXT: ''
 
     steps:
-      # compute inputs
       - name: Log inputs
         run: |
-          echo "::warning::'
+          echo "
             Pre-build skipping tests: ${{ contains(github.event.inputs.prebuild, 'true') }}
-          '"
+            Maven flags: ${{ github.event.inputs.mavenFlags }}
+            OpenPose container port: ${{ github.event.inputs.openposeContainerPort }}
+            Story ID: ${{ github.event.inputs.storyId }}
+          "
 
+      # compute inputs
       - name: Set AIST_OPENPOSE_API_ORIGIN
         if: github.event.inputs.storyId
         run: echo "AIST_OPENPOSE_API_ORIGIN=http://aist-openpose-api:${{ github.event.inputs.openposeContainerPort }}" >> $GITHUB_ENV
