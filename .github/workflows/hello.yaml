@@ -31,6 +31,8 @@ jobs:
       UPPER_BOUND: 6000
 
     steps:
+      - name: netstat
+        run: netstat -aln
       - name: Find free port
         id: findFreePort
         run: |
@@ -44,7 +46,7 @@ jobs:
             }
             END {
               for (i = $LOWER_BOUND; i < $UPPER_BOUND && p[i]; i++){};
-              if (i == $UPPER_BOUND) {exit 1};
+              if (i == $UPPER_BOUND) {exit 11};
               echo "::set-output name=port::i"
             }
           '
