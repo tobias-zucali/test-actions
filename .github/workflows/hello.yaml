@@ -3,7 +3,7 @@ name: Just test
 on: 
   push:
     paths:
-      - './some_dir/**'
+      - 'some_dir/**/*.*'
   workflow_dispatch:
     inputs:
       prebuild:
