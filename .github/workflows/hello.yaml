@@ -2,6 +2,8 @@ name: Just test
 
 on: 
   push:
+    paths:
+      - 'some_dir/'
   workflow_dispatch:
     inputs:
       prebuild:
@@ -36,7 +38,7 @@ jobs:
       - name: Find free port
         id: findFreePort
         run: |
-          netstat -aln | awk '
+          open_port=$(netstat -aln | awk '
             $6 == "LISTEN" {
               if ($4 ~ "[.:][0-9]+$") {
                 split($4, a, /[:.]/);
@@ -45,11 +47,13 @@ jobs:
               }
             }
             END {
-              for (i = $LOWER_BOUND; i < $UPPER_BOUND && p[i]; i++){};
-              if (i == $UPPER_BOUND) {exit 11};
-              echo "::set-output name=port::i"
+              for (i = 3000; i < 65000 && p[i]; i++){};
+              if (i == 65000) {exit 1};
+              print i
             }
-          '
+          ')
+          echo "found free port ${open_port}"
+          echo "::set-output name=port::${open_port}"
   something_to_test:
     runs-on: ubuntu-latest
 
